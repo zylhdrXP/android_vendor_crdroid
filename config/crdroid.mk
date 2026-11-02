@@ -75,3 +75,16 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/android.hardware.biometrics.face.xml
 endif
+
+# MindTheGapps
+ifeq ($(WITH_GAPPS),true)
+    GAPPS_ARCH := $(TARGET_ARCH)
+    ifeq ($(GAPPS_ARCH),)
+        ifeq ($(TARGET_SUPPORTS_64_BIT_APPS),true)
+            GAPPS_ARCH := arm64
+        else
+            GAPPS_ARCH := arm
+        endif
+    endif
+    $(call inherit-product-if-exists, vendor/gapps/$(GAPPS_ARCH)/$(GAPPS_ARCH)-vendor.mk)
+endif

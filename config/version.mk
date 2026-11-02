@@ -5,7 +5,11 @@ PRODUCT_VERSION_MINOR = 0
 CR_VERSION := 13.0
 
 # Internal version
+ifeq ($(WITH_GAPPS),true)
+LINEAGE_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(LINEAGE_BUILD)-Gapps-v$(CR_VERSION)
+else
 LINEAGE_VERSION := crDroidAndroid-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date +%Y%m%d)-$(LINEAGE_BUILD)-v$(CR_VERSION)
+endif
 
 # Display version
 LINEAGE_DISPLAY_VERSION := v$(CR_VERSION)-$(shell date +%Y%m%d)
